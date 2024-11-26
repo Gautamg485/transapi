@@ -18,12 +18,13 @@ import java.util.Date;
 @Component
 public class JwtUtils {
 
-    private static long expiryDuration = 60 * 60 * 24;
+//    private static long expiryDuration = 60 * 60 * 24;
 
-    private static final String PUBLIC_KEY = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIY5MKq4r6Z/7tje3n4UK/iYmcEV89EHbV9BP5EDxnP8gyvq0ckNO3yZkBoCo7WkvOVmE9YK3DAw1WkYUQl/5+UCAwEAAQ==";
+
+    private static final String PUBLIC_KEY = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIYlSWpzdJ6Ts4FCLVc68oLnu9Yi++bGTCmMJQ/5JJ/WUWktHTcbFqWNv+v4dt7OEBn/cJ6SYDQprlb50hB4KMkCAwEAAQ==";
 
     // Static RSA public key
-    private static final String PRIVATE_KEY = "MIIBUwIBADANBgkqhkiG9w0BAQEFAASCAT0wggE5AgEAAkEAhjkwqrivpn/u2N7efhQr+JiZwRXz0QdtX0E/kQPGc/yDK+rRyQ07fJmQGgKjtaS85WYT1grcMDDVaRhRCX/n5QIDAQABAkB57lQekp3GZCuGyZdW814qe/4Y4KdX+SZLRQvI4aQTUis9XK1g9PFZhv7TiFj+urTzOk2d1toOKlp/vB4AMHEhAiEA/7U+OzlLlzknJqirTJVb7RlqOSgKnohWkHNbHkar+kkCIQCGYG5AlJr82qrkCIGygUE7cW3fm1vEQQIJggK/W0cgvQIhAI483DQHZ/Pjl9KaSkccYfkehQbsLhQHVNefQ1UxDKL5AiAfu+Qtoiqb7jQPWCbw9e9mz1nIRdM9HLETd72YXUEF7QIfcaS5sOOQBj41Bs589HMN/NsYYa6GmTxsPHFHj8ZzTg==";
+    private static final String PRIVATE_KEY = "MIIBUgIBADANBgkqhkiG9w0BAQEFAASCATwwggE4AgEAAkEAhiVJanN0npOzgUItVzrygue71iL75sZMKYwlD/kkn9ZRaS0dNxsWpY2/6/h23s4QGf9wnpJgNCmuVvnSEHgoyQIDAQABAj9jWaCfnOLCKQhiswbhk/oILMu9zJGQv7Lb31X6GCUH1KBSljvFs0qRL4N2WNox2ZE/gDmK/XSwIxCealTOFgECIQC1+fpoxOHXj2jOanK0CDOE6vm7/fXwXdVyMg9OET+HeQIhALy2eLSAWup44D5nPyAU2G88s8jSR2ARv4FVr3GbSEfRAiA9boImVDCZgIQ1CqJmPE6IFHryB6260zJ3NocMJ652oQIgA+41A2Vs/1c3LHWQDgYBIAf+op8ml2ynNXVoaxBV6BECIBOPc5x11pHDqdLQZqmmrhYFngflc4Prdioul2fVsNaS";
 
     // Get RSA private key
     private static PrivateKey getPrivateKey() throws Exception {
@@ -56,16 +57,15 @@ public class JwtUtils {
     }
     public String generateJwt(Users user) throws Exception {
         long milliTime = System.currentTimeMillis();
-        long expiryTime = milliTime + expiryDuration * 1000;
+//        long expiryTime = milliTime + expiryDuration * 1000;
 
         Date issuedAt = new Date(milliTime);
-        Date expiryAt = new Date(expiryTime);
+//        Date expiryAt = new Date(expiryTime);
 
         // claims
         Claims claims = Jwts.claims()
                 .setIssuer(user.getId().toString())
-                .setIssuedAt(issuedAt)
-                .setExpiration(expiryAt);
+                .setIssuedAt(issuedAt);
 
         // optional claims
         claims.put("userId", user.getId());

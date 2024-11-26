@@ -41,6 +41,10 @@ public class UserController {
             user.setLoginBy(request.getLoginBy());
             user.setLoginRawData(request.getLoginRawData());
             usersRepository.save(user);
+        } else {
+            if (request.getLoginBy()!=null && request.getLoginBy().equals("app")) {
+                return new ResponseEntity(new GenericResponse<String>(400, "Already Exists"), null, HttpStatus.OK);
+            }
         }
 
         String token = jwtUtils.generateJwt(user);
